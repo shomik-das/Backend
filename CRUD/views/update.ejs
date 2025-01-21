@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Product Page</title>
+</head>
+<body>
+    <h1>Update Product Page</h1>
+    <img src="/<%= product.filename %>" alt="" style="width: 100px;">
+    <form action="/crud/updateProduct" method="post">
+        <input type="text" value="<%= product.id %>" name="productId" hidden>
+        <input type="text" value="<%= product.name %>" name="productName">
+        <input type="text" value="<%= product.price %>" name="productPrice">
+        <input type="submit" class="button">
+    </form>
+    <a href="/products"><button>Back</button></a>
+</body>
+</html>

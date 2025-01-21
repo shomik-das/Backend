@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+</head>
+<body>
+    <table id="table" border="1"></table>
+
+    <h1>Add Task</h1>
+    <input type="text" id="nameInput" placeholder="Task name" required>
+    <input type="number" id="idInput" placeholder="Task ID" required>
+    <button onclick="addTask()">Add Task</button>
+
+
+    <script>
+        const fetchAllData = async () => {
+            const response = await fetch('/getdata');
+            const data = await response.json();
+            createTable(data);
+        };
+
+        function createTable(data) {
+            const table = document.getElementById('table');
+            table.innerHTML = '';
+
+            data.forEach((element) => {
+                const row = document.createElement('tr');
+
+                const td1 = document.createElement('td');
+                td1.textContent = element.id;
+
+                const td2 = document.createElement('td');
+                td2.textContent = element.name;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+
+                deleteButton.addEventListener('click', async () => {
+                    await fetch('/delete', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ id: element.id })
+                    });
+                    fetchAllData();
+                });
+
+                row.append(td1, td2, deleteButton);
+                table.append(row);
+            });
+        }
+
+        const addTask = async () => {
+            const name = document.getElementById('nameInput').value;
+            const id = document.getElementById('idInput').value;
+
+            if (!name || !id) {
+                alert("Please provide both name and id.");
+                return;
+            }
+
+            const response = await fetch('/addtask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, id }),
+            });
+
+            if (response.ok) {
+                document.getElementById('nameInput').value = '';
+                document.getElementById('idInput').value = '';
+                fetchAllData();
+            } else {
+                alert("Error adding task.");
+            }
+        };
+
+        fetchAllData();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+function showData(data) {
+    const table = document.createElement("table");
+    const tbody = document.createElement("tbody");
+
+    data.forEach((item) => {
+        const row = document.createElement("tr");
+
+        const td1 = document.createElement("td");
+        td1.textContent = item.gameName || item.foodName;
+
+        const td2 = document.createElement("td");
+        td2.textContent = item.status;
+
+        if (item.status === "active") {
+            row.style.backgroundColor = "green";
+        } else {
+            row.style.backgroundColor = "";
+        }
+
+        const td3 = document.createElement("td");
+        const checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.checked = item.status === "active";
+
+        checkBox.addEventListener("change", (event) => {
+            item.status = event.target.checked ? "active" : "inactive";
+            getTotal(data);
+            showData(data);
+        });
+
+        td3.appendChild(checkBox);
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+
+        tbody.appendChild(row);
+    });
+
+    nameContainer.innerHTML = "";
+    table.appendChild(tbody);
+    nameContainer.appendChild(table);
+}
+
+function getTotal(data) {
+    const activeCount = data.filter((item) => item.status === "active").length;
+    total.textContent = `Total active items: ${activeCount}`;
+}
+
+
+
+ -->

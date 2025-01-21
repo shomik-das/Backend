@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>this is home page</h1>
+    <table id="productTable">
+      <tr>
+        <th>Name</th>
+        <th>Image</th>
+      </tr>
+    </table>
+    <a href="/logout">logout</a>
+
+    <script>
+      async function fetchAndDisplayProducts() {
+        const response = await fetch("/api/getUser");
+        const user = await response.json();
+        const productTable = document.getElementById("productTable");
+        const row = document.createElement("tr");
+        row.innerHTML = `
+                          <td>${user.userName}</td>
+                          <td><img src="${user.fileName}" alt="" style="max-width: 100px;"></td>
+                      `;
+        productTable.appendChild(row);
+      }
+      fetchAndDisplayProducts();
+    </script>
+  </body>
+</html>
