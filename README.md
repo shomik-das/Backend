@@ -20,26 +20,20 @@ Each project focuses on a specific topic, providing hands-on experience and prac
 - A beginner-friendly project covering the essentials of HTTP requests and responses.
 - Focuses on understanding how data flows between clients and servers, including request parsing and response handling.
 
----
-
-### Login System
+### LoginAll
 This section includes several implementations of a user login system, each exploring different technologies and integrations:
 - **Login**: A basic login implementation using fundamental backend practices.
 - **Login_multer_ejs_db**: Combines user login with file upload, EJS templating for the frontend, and database integration.
 - **Login_multer_ejs_mongoose**: Enhances the previous version by introducing Mongoose (MongoDB ORM) for database interaction.
 - **Login_multer_mongoose**: Focuses on file upload and user authentication, using Mongoose for streamlined database management.
 
----
-
-### File Upload with Multer
+### MulterAll
 A set of projects exploring file upload functionality using the Multer middleware:
 - **multer**: Basic file upload handling with Multer.
 - **multer_db**: Extends file upload functionality by integrating database storage for metadata or file paths.
 - **multer_mongoose**: Combines Multer with Mongoose for efficient and scalable file management in MongoDB.
 
----
-
-### Todo App
+### TodoAll
 A collection of projects implementing a simple todo app for practicing backend logic and CRUD operations:
 - **Basic_todo_add_delete_update**: A minimalistic implementation showcasing add, delete, and update functionalities.
 - **Create_table_todo_using_fetch**: Enhances the todo app by dynamically updating the frontend using JavaScript `fetch` API to display tasks in a table format.
